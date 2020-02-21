@@ -6,7 +6,7 @@ import com.udogan.magazayonetimi.ui.MainFrame;
 public class Runner {
 
 	public static void main(String[] args) {
-		new MainFrame().setVisible(true);
+		new LoginFrame().setVisible(true);
 	}
 
 }

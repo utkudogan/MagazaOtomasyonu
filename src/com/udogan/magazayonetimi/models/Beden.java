@@ -30,35 +30,35 @@ public Long getId() {
 public void setId(Long id) {
 	this.id = id;
 }
-@Enumerated
+
 public Bedenler getBeden() {
 	return beden;
 }
 public void setBeden(Bedenler beden) {
 	this.beden = beden;
 }
-@Enumerated
+
 public int getBasen() {
 	return basen;
 }
 public void setBasen(int basen) {
 	this.basen = basen;
 }
-@Enumerated
+
 public int getBel() {
 	return bel;
 }
 public void setBel(int bel) {
 	this.bel = bel;
 }
-@Enumerated
+
 public int getGogus() {
 	return gogus;
 }
 public void setGogus(int gogus) {
 	this.gogus = gogus;
 }
-@Enumerated
+
 public Cinsiyet getCinsiyet() {
 	return cinsiyet;
 }

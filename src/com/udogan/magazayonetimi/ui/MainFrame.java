@@ -9,24 +9,42 @@ import javax.swing.JTree;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
+import javax.swing.JTable;
 
 public class MainFrame extends JFrame {
 	public MainFrame() {
+		setBounds(500, 500, 700, 700);
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnNewMenu_1 = new JMenu("Kay\u0131tlar");
-		mnNewMenu_1.setIcon(null);
-		menuBar.add(mnNewMenu_1);
+		JMenu mnIslemler = new JMenu("\u0130\u015ELEMLER");
+		mnIslemler.setIcon(null);
+		menuBar.add(mnIslemler);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Kullan\u0131c\u0131 Kayd\u0131");
-		mntmNewMenuItem.setIcon(null);
-		mnNewMenu_1.add(mntmNewMenuItem);
+		JMenuItem mntmBedenIslemleri = new JMenuItem("BEDEN \u0130\u015ELEMLER\u0130");
+		mntmBedenIslemleri.setIcon(null);
+		mnIslemler.add(mntmBedenIslemleri);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Urun Kayd\u0131");
-		mntmNewMenuItem_1.setIcon(null);
-		mnNewMenu_1.add(mntmNewMenuItem_1);
+		JMenuItem mntmDistributorIslemleri = new JMenuItem("D\u0130STR\u0130B\u00DCT\u00D6R \u0130\u015ELEMLER\u0130");
+		mntmDistributorIslemleri.setIcon(null);
+		mnIslemler.add(mntmDistributorIslemleri);
+		
+		JMenuItem mnýtmKategoriIslemleri = new JMenuItem("KATEGOR\u0130 \u0130\u015ELEMLER\u0130");
+		mnIslemler.add(mnýtmKategoriIslemleri);
+		
+		JMenuItem mnýtmKullaniciIslemleri = new JMenuItem("KULLANICI \u0130\u015ELEMLER\u0130");
+		mnIslemler.add(mnýtmKullaniciIslemleri);
+		
+		JMenuItem mnýtmMarkaIslemleri = new JMenuItem("MARKA \u0130\u015ELEMLER\u0130");
+		mnIslemler.add(mnýtmMarkaIslemleri);
+		
+		JMenuItem mnýtmMusteriIslemleri = new JMenuItem("M\u00DC\u015ETER\u0130 \u0130\u015ELEMLER\u0130");
+		mnIslemler.add(mnýtmMusteriIslemleri);
+		
+		JMenuItem mnýtmUrunIslemleri = new JMenuItem("\u00DCR\u00DCN \u0130\u015ELEMLER\u0130");
+		mnIslemler.add(mnýtmUrunIslemleri);
 		
 		JMenu mnNewMenu = new JMenu("Ayarlar");
 		menuBar.add(mnNewMenu);
