@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 
 import com.udogan.magazayonetimi.models.Kullanici;
 import com.udogan.magazayonetimi.ui.LoginFrame;
-import com.udogan.magazayonetimi.ui.MainFrame;
+import com.udogan.magazayonetimi.ui.MainFrameEski;
 import com.udogan.magazayonetimi.utils.dao.DbServicessBase;
 
 import javax.swing.JPasswordField;
@@ -87,7 +87,7 @@ public class LoginFrame extends JFrame {
 					List<Kullanici> liste = dao.search(temp);
 					if (liste.size() > 0) {
 						oturumAcanKullanici = liste.get(0);
-						new MainFrame().setVisible(true);
+						new MainFrameEski().setVisible(true);
 						LoginFrame.this.dispose();
 					}
 
