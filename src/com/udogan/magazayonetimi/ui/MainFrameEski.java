@@ -10,6 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JTable;
+import javax.swing.JTabbedPane;
 
 public class MainFrameEski extends JFrame {
 	public MainFrameEski() {
@@ -51,6 +52,21 @@ public class MainFrameEski extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Renk Se\u00E7imi");
 		mnNewMenu.add(mntmNewMenuItem_2);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		getContentPane().add(tabbedPane, BorderLayout.CENTER);
+		
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("New tab", null, tabbedPane_1, null);
+		
+		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("New tab", null, tabbedPane_2, null);
+		
+		JTabbedPane tabbedPane_3 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("New tab", null, tabbedPane_3, null);
+		
+		JTabbedPane tabbedPane_4 = new JTabbedPane(JTabbedPane.TOP);
+		getContentPane().add(tabbedPane_4, BorderLayout.NORTH);
 	}
 
 }
