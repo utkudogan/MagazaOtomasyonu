@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.text.TabExpander;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
@@ -26,6 +27,8 @@ import com.udogan.magazayonetimi.models.enums.Cinsiyet;
 import com.udogan.magazayonetimi.utils.dao.DbServicessBase;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class BedenIslemleriPaneli extends JPanel {
 	private JPanel panel;
@@ -106,14 +109,13 @@ public class BedenIslemleriPaneli extends JPanel {
 
 	}
 
-	
 	private void combolariDoldur() {
 		cmbBeden.setModel(new DefaultComboBoxModel(Bedenler.values()));
 		cmbBeden.setSelectedIndex(-1);
 		cmbCinsiyet.setModel(new DefaultComboBoxModel(Cinsiyet.values()));
 		cmbCinsiyet.setSelectedIndex(-1);
 	}
-	
+
 	private JPanel getPanel() {
 		if (panel == null) {
 			panel = new JPanel();
@@ -243,12 +245,12 @@ public class BedenIslemleriPaneli extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					DbServicessBase<Beden> dao = new DbServicessBase<Beden>();
 					Beden eklenecekBeden = new Beden();
-					eklenecekBeden.setCinsiyet((Cinsiyet)cmbCinsiyet.getSelectedItem());
-					eklenecekBeden.setBeden((Bedenler)cmbBeden.getSelectedItem());
+					eklenecekBeden.setCinsiyet((Cinsiyet) cmbCinsiyet.getSelectedItem());
+					eklenecekBeden.setBeden((Bedenler) cmbBeden.getSelectedItem());
 					eklenecekBeden.setBasen(Integer.parseInt(txtBasen.getText()));
 					eklenecekBeden.setBel(Integer.parseInt(txtBel.getText()));
 					eklenecekBeden.setGogus(Integer.parseInt(txtGogus.getText()));
-					
+
 					if (dao.save(eklenecekBeden)) {
 						tabloyuDoldur();
 						txtBasen.setText("");
@@ -256,8 +258,7 @@ public class BedenIslemleriPaneli extends JPanel {
 						txtGogus.setText("");
 						cmbCinsiyet.setSelectedIndex(-1);
 						cmbBeden.setSelectedIndex(-1);
-					}
-					else {
+					} else {
 						showMessageDialog(null, "Kaydetme Ýþlemi Baþarýsýz Oldu!");
 					}
 				}
@@ -279,8 +280,7 @@ public class BedenIslemleriPaneli extends JPanel {
 					silinecekBeden.setId(Long.valueOf(o));
 					if (dao.delete(silinecekBeden)) {
 						tabloyuDoldur();
-					}
-					else {
+					} else {
 						showMessageDialog(null, "Silme Ýþlemi Baþarýsýz Oldu!");
 					}
 				}
@@ -293,8 +293,54 @@ public class BedenIslemleriPaneli extends JPanel {
 	private JTable getTableBedenler() {
 		if (tableBedenler == null) {
 			tableBedenler = new JTable();
+			tableBedenler.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int secilenSatir = tableBedenler.getSelectedRow();
+					Beden degistirilecekBeden = new Beden();
+					degistirilecekBeden
+							.setId(Long.parseLong(tableBedenler.getModel().getValueAt(secilenSatir, 0).toString()));
+					String temp = tableBedenler.getModel().getValueAt(secilenSatir, 1).toString();
+					if (temp.equals("erkek")) {
+						degistirilecekBeden.setCinsiyet(Cinsiyet.erkek);
+					} else if (temp.equals("kadin")) {
+						degistirilecekBeden.setCinsiyet(Cinsiyet.kadin);
+					} else if (temp.equals("unisex")) {
+						degistirilecekBeden.setCinsiyet(Cinsiyet.unisex);
+					}
+					temp = tableBedenler.getModel().getValueAt(secilenSatir, 2).toString();
+					if (temp.equals("XS")) {
+						degistirilecekBeden.setBeden(Bedenler.XS);
+					} else if (temp.equals("S")) {
+						degistirilecekBeden.setBeden(Bedenler.S);
+					} else if (temp.equals("M")) {
+						degistirilecekBeden.setBeden(Bedenler.M);
+					} else if (temp.equals("L")) {
+						degistirilecekBeden.setBeden(Bedenler.L);
+					} else if (temp.equals("XL")) {
+						degistirilecekBeden.setBeden(Bedenler.XL);
+					} else if (temp.equals("XXL")) {
+						degistirilecekBeden.setBeden(Bedenler.XXL);
+					} else if (temp.equals("XXXL")) {
+						degistirilecekBeden.setBeden(Bedenler.XXXL);
+					} else if (temp.equals("XXXXL")) {
+						degistirilecekBeden.setBeden(Bedenler.XXXXL);
+					} else if (temp.equals("XXXXXL")) {
+						degistirilecekBeden.setBeden(Bedenler.XXXXXL);
+					}
+					degistirilecekBeden.setBasen(
+							Integer.parseInt(tableBedenler.getModel().getValueAt(secilenSatir, 3).toString()));
+					degistirilecekBeden
+							.setBel(Integer.parseInt(tableBedenler.getModel().getValueAt(secilenSatir, 4).toString()));
+					degistirilecekBeden.setGogus(
+							Integer.parseInt(tableBedenler.getModel().getValueAt(secilenSatir, 5).toString()));
+					BedenDegistirme frame = new BedenDegistirme(degistirilecekBeden);
+					frame.setVisible(true);
+				}
+			});
 		}
 		return tableBedenler;
+
 	}
 
 	private JScrollPane getScrollPane() {
