@@ -16,9 +16,12 @@ import com.udogan.magazayonetimi.utils.dao.DbServicessBase;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class BedenDegistirme extends JFrame {
@@ -36,16 +39,20 @@ public class BedenDegistirme extends JFrame {
 	private JButton btnKaydet;
 	private JButton btnIptal;
 	private Beden beden;
-	
-	public BedenDegistirme(Beden beden) {
+	public JComponent parentComponent;
+	public BedenIslemleriPaneli parentFrame;
+
+	public BedenDegistirme(MouseEvent e, Beden beden) {
 		this.beden = beden;
+		this.parentComponent = (JComponent) e.getSource();
+		this.parentFrame = (BedenIslemleriPaneli) parentComponent.getParent().getParent().getParent().getParent();
 		setTitle("Beden Bilgileri Deðiþtirme Ekraný");
 		setSize(302, 281);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().add(getPanel(), BorderLayout.CENTER);
 		alanlariDoldur();
 	}
-	
+
 	private void alanlariDoldur() {
 		cmbBeden.setModel(new DefaultComboBoxModel(Bedenler.values()));
 		cmbBeden.setSelectedItem(beden.getBeden());
@@ -75,6 +82,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return panel;
 	}
+
 	private JLabel getLabel() {
 		if (label == null) {
 			label = new JLabel("Cinsiyet :");
@@ -83,6 +91,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return label;
 	}
+
 	private JLabel getLabel_1() {
 		if (label_1 == null) {
 			label_1 = new JLabel("Beden :");
@@ -91,6 +100,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return label_1;
 	}
+
 	private JLabel getLabel_2() {
 		if (label_2 == null) {
 			label_2 = new JLabel("Basen :");
@@ -99,6 +109,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return label_2;
 	}
+
 	private JLabel getLabel_3() {
 		if (label_3 == null) {
 			label_3 = new JLabel("Bel :");
@@ -107,6 +118,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return label_3;
 	}
+
 	private JLabel getLabel_4() {
 		if (label_4 == null) {
 			label_4 = new JLabel("G\u00F6\u011F\u00FCs :");
@@ -115,6 +127,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return label_4;
 	}
+
 	private JTextField getTxtBasen() {
 		if (txtBasen == null) {
 			txtBasen = new JTextField();
@@ -123,6 +136,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return txtBasen;
 	}
+
 	private JTextField getTxtBel() {
 		if (txtBel == null) {
 			txtBel = new JTextField();
@@ -131,6 +145,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return txtBel;
 	}
+
 	private JTextField getTxtGogus() {
 		if (txtGogus == null) {
 			txtGogus = new JTextField();
@@ -139,6 +154,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return txtGogus;
 	}
+
 	private JComboBox getCmbCinsiyet() {
 		if (cmbCinsiyet == null) {
 			cmbCinsiyet = new JComboBox();
@@ -147,6 +163,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return cmbCinsiyet;
 	}
+
 	private JComboBox getCmbBeden() {
 		if (cmbBeden == null) {
 			cmbBeden = new JComboBox();
@@ -155,6 +172,7 @@ public class BedenDegistirme extends JFrame {
 		}
 		return cmbBeden;
 	}
+
 	private JButton getBtnKaydet() {
 		if (btnKaydet == null) {
 			btnKaydet = new JButton("KAYDET");
@@ -163,35 +181,40 @@ public class BedenDegistirme extends JFrame {
 					DbServicessBase<Beden> dao = new DbServicessBase<Beden>();
 					Beden degisecekBeden = new Beden();
 					degisecekBeden.setId(beden.getId());
-					degisecekBeden.setCinsiyet((Cinsiyet)cmbCinsiyet.getSelectedItem());
-					degisecekBeden.setBeden((Bedenler)cmbBeden.getSelectedItem());
+					degisecekBeden.setCinsiyet((Cinsiyet) cmbCinsiyet.getSelectedItem());
+					degisecekBeden.setBeden((Bedenler) cmbBeden.getSelectedItem());
 					degisecekBeden.setBasen(Integer.parseInt(txtBasen.getText()));
 					degisecekBeden.setBel(Integer.parseInt(txtBel.getText()));
 					degisecekBeden.setGogus(Integer.parseInt(txtGogus.getText()));
-					
+
 					if (dao.update(degisecekBeden)) {
 						showMessageDialog(null, "Kaydetme Ýþlemi Baþarýlý!");
 						BedenDegistirme.this.dispose();
-					}
-					else {
+					} else {
 						showMessageDialog(null, "Kaydetme Ýþlemi Baþarýsýz Oldu!");
 					}
+					parentFrame.parentFrame.setEnabled(true);
+					parentFrame.tabloyuDoldur();
 				}
 			});
 			btnKaydet.setBounds(55, 209, 89, 20);
 		}
+
 		return btnKaydet;
 	}
+
 	private JButton getBtnIptal() {
 		if (btnIptal == null) {
 			btnIptal = new JButton("\u0130PTAL");
 			btnIptal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					BedenDegistirme.this.dispose();
+					parentFrame.parentFrame.setEnabled(true);
 				}
 			});
 			btnIptal.setBounds(154, 209, 89, 20);
 		}
+
 		return btnIptal;
 	}
 }

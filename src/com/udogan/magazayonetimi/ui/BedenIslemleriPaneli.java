@@ -47,8 +47,10 @@ public class BedenIslemleriPaneli extends JPanel {
 	private JButton btnSil;
 	private JTable tableBedenler;
 	private JScrollPane scrollPane;
+	public MainFrame parentFrame;
 
-	public BedenIslemleriPaneli() {
+	public BedenIslemleriPaneli(MainFrame parentFrame) {
+		this.parentFrame = parentFrame;
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addComponent(getPanel(), GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
@@ -63,22 +65,7 @@ public class BedenIslemleriPaneli extends JPanel {
 		combolariDoldur();
 	}
 
-	public BedenIslemleriPaneli(LayoutManager layout) {
-		super(layout);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BedenIslemleriPaneli(boolean isDoubleBuffered) {
-		super(isDoubleBuffered);
-		// TODO Auto-generated constructor stub
-	}
-
-	public BedenIslemleriPaneli(LayoutManager layout, boolean isDoubleBuffered) {
-		super(layout, isDoubleBuffered);
-		// TODO Auto-generated constructor stub
-	}
-
-	private void tabloyuDoldur() {
+	public void tabloyuDoldur() {
 
 		try {
 			DbServicessBase<Beden> dao = new DbServicessBase<Beden>();
@@ -334,8 +321,10 @@ public class BedenIslemleriPaneli extends JPanel {
 							.setBel(Integer.parseInt(tableBedenler.getModel().getValueAt(secilenSatir, 4).toString()));
 					degistirilecekBeden.setGogus(
 							Integer.parseInt(tableBedenler.getModel().getValueAt(secilenSatir, 5).toString()));
-					BedenDegistirme frame = new BedenDegistirme(degistirilecekBeden);
+					BedenDegistirme frame = new BedenDegistirme(e, degistirilecekBeden);
+					parentFrame.setEnabled(false);
 					frame.setVisible(true);
+					
 				}
 			});
 		}

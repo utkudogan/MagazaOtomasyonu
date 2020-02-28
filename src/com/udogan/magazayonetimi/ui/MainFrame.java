@@ -106,10 +106,10 @@ public class MainFrame extends JFrame {
 				if (anaTabbedPane.getTabCount() == 0) {
 					anaTabbedPane.setVisible(true);
 					anaTabbedPane.setSize(panel_1.getWidth(), panel_1.getHeight());					
-					anaTabbedPane.add(tetiklenenMenuIsmi, new BedenIslemleriPaneli());
+					anaTabbedPane.add(tetiklenenMenuIsmi, new BedenIslemleriPaneli(MainFrame.this));
 				}
 				else {
-					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new BedenIslemleriPaneli(),null, anaTabbedPane.getTabCount());
+					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new BedenIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
 				}
 				break;
 			case "Distribütor Ýþlemleri":
