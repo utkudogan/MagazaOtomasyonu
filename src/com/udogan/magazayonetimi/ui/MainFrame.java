@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
 	
 	private void initialize() {
 		setTitle("Kullanýcý Giriþ Ekraný");
-		setSize(1000, 500);
+		setSize(1000, 1000);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		getContentPane().add(getPanel(), BorderLayout.NORTH);
@@ -116,10 +116,10 @@ public class MainFrame extends JFrame {
 				if (anaTabbedPane.getTabCount() == 0) {
 					anaTabbedPane.setVisible(true);
 					anaTabbedPane.setSize(panel_1.getWidth(), panel_1.getHeight());					
-					anaTabbedPane.add(tetiklenenMenuIsmi, new DistributorIslemleriPaneli());
+					anaTabbedPane.add(tetiklenenMenuIsmi, new DistributorIslemleriPaneliEski(this));
 				}
 				else {
-					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new DistributorIslemleriPaneli(),null, anaTabbedPane.getTabCount());
+					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new DistributorIslemleriPaneliEski(this),null, anaTabbedPane.getTabCount());
 				}
 				break;
 			default:

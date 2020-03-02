@@ -1,7 +1,6 @@
 package com.udogan.magazayonetimi.main;
 
 import com.udogan.magazayonetimi.ui.LoginFrame;
-import com.udogan.magazayonetimi.ui.MainFrameEski;
 
 public class Runner {
 
