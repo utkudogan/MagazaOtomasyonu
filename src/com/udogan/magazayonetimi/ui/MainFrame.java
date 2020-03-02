@@ -30,7 +30,7 @@ public class MainFrame extends JFrame {
 	
 	private void initialize() {
 		setTitle("Kullanýcý Giriþ Ekraný");
-		setSize(500, 500);
+		setSize(1000, 500);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		getContentPane().add(getPanel(), BorderLayout.NORTH);

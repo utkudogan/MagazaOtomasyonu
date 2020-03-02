@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class BedenDegistirme extends JFrame {
 	private JPanel panel;
@@ -41,8 +43,16 @@ public class BedenDegistirme extends JFrame {
 	private Beden beden;
 	public JComponent parentComponent;
 	public BedenIslemleriPaneli parentFrame;
+	private JButton btnSil;
 
 	public BedenDegistirme(MouseEvent e, Beden beden) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				parentFrame.parentFrame.setEnabled(true);
+				parentFrame.tabloyuDoldur();
+			}
+		});
 		this.beden = beden;
 		this.parentComponent = (JComponent) e.getSource();
 		this.parentFrame = (BedenIslemleriPaneli) parentComponent.getParent().getParent().getParent().getParent();
@@ -79,6 +89,7 @@ public class BedenDegistirme extends JFrame {
 			panel.add(getCmbBeden());
 			panel.add(getBtnKaydet());
 			panel.add(getBtnIptal());
+			panel.add(getBtnSil());
 		}
 		return panel;
 	}
@@ -192,12 +203,10 @@ public class BedenDegistirme extends JFrame {
 						BedenDegistirme.this.dispose();
 					} else {
 						showMessageDialog(null, "Kaydetme Ýþlemi Baþarýsýz Oldu!");
-					}
-					parentFrame.parentFrame.setEnabled(true);
-					parentFrame.tabloyuDoldur();
+					}					
 				}
 			});
-			btnKaydet.setBounds(55, 209, 89, 20);
+			btnKaydet.setBounds(13, 210, 80, 20);
 		}
 
 		return btnKaydet;
@@ -209,12 +218,28 @@ public class BedenDegistirme extends JFrame {
 			btnIptal.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					BedenDegistirme.this.dispose();
-					parentFrame.parentFrame.setEnabled(true);
 				}
 			});
-			btnIptal.setBounds(154, 209, 89, 20);
+			btnIptal.setBounds(199, 210, 80, 20);
 		}
 
 		return btnIptal;
+	}
+	private JButton getBtnSil() {
+		if (btnSil == null) {
+			btnSil = new JButton("S\u0130L");
+			btnSil.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					DbServicessBase<Beden> dao = new DbServicessBase<Beden>();
+					if (dao.delete(beden)) {
+						BedenDegistirme.this.dispose();
+					} else {
+						showMessageDialog(null, "Silme Ýþlemi Baþarýsýz Oldu!");
+					}
+				}
+			});
+			btnSil.setBounds(106, 210, 80, 20);
+		}
+		return btnSil;
 	}
 }

@@ -44,7 +44,6 @@ public class BedenIslemleriPaneli extends JPanel {
 	private JComboBox cmbCinsiyet;
 	private JComboBox cmbBeden;
 	private JButton btnKaydet;
-	private JButton btnSil;
 	private JTable tableBedenler;
 	private JScrollPane scrollPane;
 	public MainFrame parentFrame;
@@ -118,7 +117,6 @@ public class BedenIslemleriPaneli extends JPanel {
 			panel.add(getCmbCinsiyet());
 			panel.add(getCmbBeden());
 			panel.add(getBtnKaydet());
-			panel.add(getBtnSil());
 		}
 		return panel;
 	}
@@ -253,28 +251,6 @@ public class BedenIslemleriPaneli extends JPanel {
 			btnKaydet.setBounds(508, 17, 89, 20);
 		}
 		return btnKaydet;
-	}
-
-	private JButton getBtnSil() {
-		if (btnSil == null) {
-			btnSil = new JButton("S\u0130L");
-			btnSil.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					DbServicessBase<Beden> dao = new DbServicessBase<Beden>();
-					Beden silinecekBeden = new Beden();
-					int secilenSatir = tableBedenler.getSelectedRow();
-					String o = tableBedenler.getModel().getValueAt(secilenSatir, 0).toString();
-					silinecekBeden.setId(Long.valueOf(o));
-					if (dao.delete(silinecekBeden)) {
-						tabloyuDoldur();
-					} else {
-						showMessageDialog(null, "Silme Ýþlemi Baþarýsýz Oldu!");
-					}
-				}
-			});
-			btnSil.setBounds(508, 54, 89, 20);
-		}
-		return btnSil;
 	}
 
 	private JTable getTableBedenler() {
