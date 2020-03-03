@@ -21,6 +21,7 @@ public class MainFrame extends JFrame {
 	private JMenuItem mntmBedenIslemleri;
 	private JTabbedPane anaTabbedPane;
 	private JMenuItem mntmKategoriIslemleri;
+	private JMenuItem mntmKullaniciIislemleri;
 	public MainFrame() {
 		initialize();		
 	}
@@ -64,6 +65,7 @@ public class MainFrame extends JFrame {
 			mnNewMenu.add(getMntmBedenIslemleri());
 			mnNewMenu.add(getMntmDistributorIslemleri());
 			mnNewMenu.add(getMntmKategoriIslemleri());
+			mnNewMenu.add(getMntmKullaniciIislemleri());
 		}
 		return mnNewMenu;
 	}
@@ -103,6 +105,20 @@ public class MainFrame extends JFrame {
 		}
 		return mntmKategoriIslemleri;
 	}
+	
+	private JMenuItem getMntmKullaniciIislemleri() {
+		if (mntmKullaniciIislemleri == null) {
+			mntmKullaniciIislemleri = new JMenuItem("Kullanici \u0130\u015Flemleri");
+			mntmKullaniciIislemleri.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					yeniTabEkle(e);	
+				}
+			});
+		}
+		return mntmKullaniciIislemleri;
+	}
 	private void yeniTabEkle(ActionEvent e) {
 			String tetiklenenMenuIsmi = e.getActionCommand();
 			switch (tetiklenenMenuIsmi) {
@@ -133,6 +149,15 @@ public class MainFrame extends JFrame {
 					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new KategoriIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
 				}
 				break;
+			case "Kullanici Ýþlemleri":
+			if (anaTabbedPane.getTabCount() == 0) {
+				anaTabbedPane.setVisible(true);				
+				anaTabbedPane.add(tetiklenenMenuIsmi, new KullaniciIslemleriPaneli(this));
+			}
+			else {
+				anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new KullaniciIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
+			}
+			break;
 			default:
 				break;
 			}
@@ -152,6 +177,7 @@ public class MainFrame extends JFrame {
 		}
 		return anaTabbedPane;
 	}
+	
 	
 	}
 
