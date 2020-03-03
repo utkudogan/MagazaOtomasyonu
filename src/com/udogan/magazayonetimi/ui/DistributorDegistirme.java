@@ -37,7 +37,7 @@ public class DistributorDegistirme extends JFrame {
 	private JButton btnIptal;
 	private Distributor distributor;
 	public JComponent parentComponent;
-	public BedenIslemleriPaneli parentFrame;
+	public DistributorIslemleriPaneli parentFrame;
 	private JButton btnSil;
 	private JTextField txttUnvan;
 	private JTextField txtYetkili;
@@ -49,13 +49,14 @@ public class DistributorDegistirme extends JFrame {
 			public void windowClosed(WindowEvent e) {
 				parentFrame.parentFrame.setEnabled(true);
 				parentFrame.tabloyuDoldur();
+				parentFrame.parentFrame.toFront();
 			}
 		});
 		this.distributor = distributor;
 		this.parentComponent = (JComponent) e.getSource();
-		this.parentFrame = (BedenIslemleriPaneli) parentComponent.getParent().getParent().getParent().getParent();
+		this.parentFrame = (DistributorIslemleriPaneli) parentComponent.getParent().getParent().getParent().getParent();
 		setTitle("Distributor Bilgileri Deðiþtirme Ekraný");
-		setSize(302, 281);
+		setSize(301, 281);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().add(getPanel(), BorderLayout.CENTER);
 		alanlariDoldur();
@@ -64,7 +65,7 @@ public class DistributorDegistirme extends JFrame {
 	private void alanlariDoldur() {
 		txttUnvan.setText(distributor.getIsim());
 		txtYetkili.setText(distributor.getYetkili());
-		txtTelefon.setText(distributor.getTelefon());
+		txtTelefon.setText(distributor.getTelefon().replaceAll("-", ""));
 		txtAdres.setText(distributor.getAdres());
 	}
 
@@ -130,9 +131,9 @@ public class DistributorDegistirme extends JFrame {
 		if (txtTelefon == null) {
 			 MaskFormatter fmt;
 				try {
-					fmt = new MaskFormatter("###-###-####");
+					fmt = new MaskFormatter("0###-###-####");
 					txtTelefon = new JFormattedTextField(fmt);
-					txtTelefon.setBounds(108, 91, 135, 20);
+					txtTelefon.setBounds(108, 91, 91, 20);
 					txtTelefon.setColumns(10);
 				} catch (ParseException e) {
 					txtTelefon = new JTextField();
@@ -150,6 +151,7 @@ public class DistributorDegistirme extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					DbServicessBase<Distributor> dao = new DbServicessBase<Distributor>();
 					Distributor degiseDistributor = new Distributor();
+					degiseDistributor.setId(distributor.getId());;
 					degiseDistributor.setIsim(txttUnvan.getText());
 					degiseDistributor.setYetkili(txtYetkili.getText());
 					degiseDistributor.setTelefon(txtTelefon.getText());
@@ -205,7 +207,7 @@ public class DistributorDegistirme extends JFrame {
 			txttUnvan = new JTextField();
 			txttUnvan.setText((String) null);
 			txttUnvan.setColumns(10);
-			txttUnvan.setBounds(108, 17, 143, 20);
+			txttUnvan.setBounds(108, 17, 171, 20);
 		}
 		return txttUnvan;
 	}
@@ -214,14 +216,14 @@ public class DistributorDegistirme extends JFrame {
 			txtYetkili = new JTextField();
 			txtYetkili.setText((String) null);
 			txtYetkili.setColumns(10);
-			txtYetkili.setBounds(108, 54, 143, 20);
+			txtYetkili.setBounds(108, 54, 171, 20);
 		}
 		return txtYetkili;
 	}
 	private JTextPane getTxtAdres() {
 		if (txtAdres == null) {
 			txtAdres = new JTextPane();
-			txtAdres.setBounds(108, 128, 143, 71);
+			txtAdres.setBounds(108, 128, 171, 71);
 		}
 		return txtAdres;
 	}

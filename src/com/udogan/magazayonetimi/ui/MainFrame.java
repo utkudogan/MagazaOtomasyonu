@@ -116,10 +116,10 @@ public class MainFrame extends JFrame {
 				if (anaTabbedPane.getTabCount() == 0) {
 					anaTabbedPane.setVisible(true);
 					anaTabbedPane.setSize(panel_1.getWidth(), panel_1.getHeight());					
-					anaTabbedPane.add(tetiklenenMenuIsmi, new DistributorIslemleriPaneliEski(this));
+					anaTabbedPane.add(tetiklenenMenuIsmi, new DistributorIslemleriPaneli(this));
 				}
 				else {
-					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new DistributorIslemleriPaneliEski(this),null, anaTabbedPane.getTabCount());
+					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new DistributorIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
 				}
 				break;
 			default:

@@ -51,6 +51,7 @@ public class BedenDegistirme extends JFrame {
 			public void windowClosed(WindowEvent e) {
 				parentFrame.parentFrame.setEnabled(true);
 				parentFrame.tabloyuDoldur();
+				parentFrame.parentFrame.toFront();
 			}
 		});
 		this.beden = beden;
