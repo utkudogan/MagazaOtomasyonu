@@ -11,26 +11,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.ComponentOrientation;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.MouseWheelEvent;
 
 public class MainFrame extends JFrame {
 	private JPanel panel;
 	private JPanel panel_1;
 	private JMenuBar menuBar;
 	private JMenu mnNewMenu;
-	private JMenuItem mnýtmDistributorIslemleri;
-	private JMenuItem mnýtmBedenIslemleri;
-	private JTabbedPane tabbedPane;
+	private JMenuItem mntmDistributorIslemleri;
+	private JMenuItem mntmBedenIslemleri;
 	private JTabbedPane anaTabbedPane;
+	private JMenuItem mntmKategoriIslemleri;
 	public MainFrame() {
 		initialize();		
 	}
 	
 	private void initialize() {
 		setTitle("Kullanýcý Giriþ Ekraný");
-		setSize(1000, 1000);
+		setSize(789, 788);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0, 0));
 		getContentPane().add(getPanel(), BorderLayout.NORTH);
@@ -49,7 +46,7 @@ public class MainFrame extends JFrame {
 		if (panel_1 == null) {
 			panel_1 = new JPanel();
 			panel_1.setLayout(new BorderLayout(0, 0));
-			panel_1.add(getAnaTabbedPane(), BorderLayout.CENTER);
+			panel_1.add(getAnaTabbedPane());
 			
 		}
 		return panel_1;
@@ -63,63 +60,77 @@ public class MainFrame extends JFrame {
 	}
 	private JMenu getMnNewMenu() {
 		if (mnNewMenu == null) {
-			mnNewMenu = new JMenu("New menu");
-			mnNewMenu.add(getMnýtmBedenIslemleri());
-			mnNewMenu.add(getMnýtmDistributorIslemleri());
+			mnNewMenu = new JMenu("\u0130\u015Flemler");
+			mnNewMenu.add(getMntmBedenIslemleri());
+			mnNewMenu.add(getMntmDistributorIslemleri());
+			mnNewMenu.add(getMntmKategoriIslemleri());
 		}
 		return mnNewMenu;
 	}
-	private JMenuItem getMnýtmDistributorIslemleri() {
-		if (mnýtmDistributorIslemleri == null) {
-			mnýtmDistributorIslemleri = new JMenuItem("Distrib\u00FCtor \u0130\u015Flemleri");
-			mnýtmDistributorIslemleri.addActionListener(new ActionListener() {
+	private JMenuItem getMntmDistributorIslemleri() {
+		if (mntmDistributorIslemleri == null) {
+			mntmDistributorIslemleri = new JMenuItem("Distrib\u00FCt\u00F6r \u0130\u015Flemleri");
+			mntmDistributorIslemleri.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					yeniTabEkle(e);
 				}
 			});
 		}
-		return mnýtmDistributorIslemleri;
+		return mntmDistributorIslemleri;
 	}
-	private JMenuItem getMnýtmBedenIslemleri() {
-		if (mnýtmBedenIslemleri == null) {
-			mnýtmBedenIslemleri = new JMenuItem("Beden \u0130\u015Flemleri");
-			mnýtmBedenIslemleri.addActionListener(new ActionListener() {
+	private JMenuItem getMntmBedenIslemleri() {
+		if (mntmBedenIslemleri == null) {
+			mntmBedenIslemleri = new JMenuItem("Beden \u0130\u015Flemleri");
+			mntmBedenIslemleri.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					yeniTabEkle(e);
 				}
 			});
 		}
-		return mnýtmBedenIslemleri;
+		return mntmBedenIslemleri;
 	}
-	private JTabbedPane getTabbedPane() {
-		if (tabbedPane == null) {
-			tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+	private JMenuItem getMntmKategoriIslemleri() {
+		if (mntmKategoriIslemleri == null) {
+			mntmKategoriIslemleri = new JMenuItem("Kategori \u0130\u015Flemleri");
+			mntmKategoriIslemleri.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					yeniTabEkle(e);					
+				}
+			});
+			
 		}
-		return tabbedPane;
+		return mntmKategoriIslemleri;
 	}
-	
 	private void yeniTabEkle(ActionEvent e) {
 			String tetiklenenMenuIsmi = e.getActionCommand();
-			JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 			switch (tetiklenenMenuIsmi) {
 			case "Beden Ýþlemleri":				
 				if (anaTabbedPane.getTabCount() == 0) {
-					anaTabbedPane.setVisible(true);
-					anaTabbedPane.setSize(panel_1.getWidth(), panel_1.getHeight());					
+					anaTabbedPane.setVisible(true);				
 					anaTabbedPane.add(tetiklenenMenuIsmi, new BedenIslemleriPaneli(MainFrame.this));
 				}
 				else {
 					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new BedenIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
 				}
 				break;
-			case "Distribütor Ýþlemleri":
+			case "Distribütör Ýþlemleri":
 				if (anaTabbedPane.getTabCount() == 0) {
-					anaTabbedPane.setVisible(true);
-					anaTabbedPane.setSize(panel_1.getWidth(), panel_1.getHeight());					
+					anaTabbedPane.setVisible(true);				
 					anaTabbedPane.add(tetiklenenMenuIsmi, new DistributorIslemleriPaneli(this));
 				}
 				else {
 					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new DistributorIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
+				}
+				break;
+			case "Kategori Ýþlemleri":
+				if (anaTabbedPane.getTabCount() == 0) {
+					anaTabbedPane.setVisible(true);				
+					anaTabbedPane.add(tetiklenenMenuIsmi, new KategoriIslemleriPaneli(this));
+				}
+				else {
+					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new KategoriIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
 				}
 				break;
 			default:
@@ -141,5 +152,6 @@ public class MainFrame extends JFrame {
 		}
 		return anaTabbedPane;
 	}
+	
 	}
 

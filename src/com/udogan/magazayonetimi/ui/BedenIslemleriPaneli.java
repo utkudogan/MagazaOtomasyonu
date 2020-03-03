@@ -248,7 +248,7 @@ public class BedenIslemleriPaneli extends JPanel {
 					}
 				}
 			});
-			btnKaydet.setBounds(508, 17, 89, 20);
+			btnKaydet.setBounds(253, 165, 89, 20);
 		}
 		return btnKaydet;
 	}
