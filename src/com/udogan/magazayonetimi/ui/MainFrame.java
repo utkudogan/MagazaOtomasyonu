@@ -22,6 +22,7 @@ public class MainFrame extends JFrame {
 	private JTabbedPane anaTabbedPane;
 	private JMenuItem mntmKategoriIslemleri;
 	private JMenuItem mntmKullaniciIislemleri;
+	private JMenuItem mntmNewMarkaIslemleri;
 	public MainFrame() {
 		initialize();		
 	}
@@ -66,6 +67,7 @@ public class MainFrame extends JFrame {
 			mnNewMenu.add(getMntmDistributorIslemleri());
 			mnNewMenu.add(getMntmKategoriIslemleri());
 			mnNewMenu.add(getMntmKullaniciIislemleri());
+			mnNewMenu.add(getMntmNewMarkaIslemleri());
 		}
 		return mnNewMenu;
 	}
@@ -119,6 +121,19 @@ public class MainFrame extends JFrame {
 		}
 		return mntmKullaniciIislemleri;
 	}
+	private JMenuItem getMntmNewMarkaIslemleri() {
+		if (mntmNewMarkaIslemleri == null) {
+			mntmNewMarkaIslemleri = new JMenuItem("Marka \u0130\u015Flemleri");
+			mntmNewMarkaIslemleri.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					yeniTabEkle(e);	
+				}
+			});
+		}
+		return mntmNewMarkaIslemleri;
+	}
 	private void yeniTabEkle(ActionEvent e) {
 			String tetiklenenMenuIsmi = e.getActionCommand();
 			switch (tetiklenenMenuIsmi) {
@@ -158,6 +173,15 @@ public class MainFrame extends JFrame {
 				anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new KullaniciIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
 			}
 			break;
+			case "Marka Ýþlemleri":
+				if (anaTabbedPane.getTabCount() == 0) {
+					anaTabbedPane.setVisible(true);				
+					anaTabbedPane.add(tetiklenenMenuIsmi, new MarkaIslemleriPaneli(this));
+				}
+				else {
+					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new MarkaIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
+				}
+				break;
 			default:
 				break;
 			}
@@ -177,6 +201,7 @@ public class MainFrame extends JFrame {
 		}
 		return anaTabbedPane;
 	}
+	
 	
 	
 	}
