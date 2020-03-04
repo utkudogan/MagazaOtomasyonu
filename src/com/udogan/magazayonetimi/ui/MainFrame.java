@@ -16,13 +16,16 @@ public class MainFrame extends JFrame {
 	private JPanel panel;
 	private JPanel panel_1;
 	private JMenuBar menuBar;
-	private JMenu mnNewMenu;
+	private JMenu mnIslemler;
 	private JMenuItem mntmDistributorIslemleri;
 	private JMenuItem mntmBedenIslemleri;
 	private JTabbedPane anaTabbedPane;
 	private JMenuItem mntmKategoriIslemleri;
 	private JMenuItem mntmKullaniciIislemleri;
 	private JMenuItem mntmNewMarkaIslemleri;
+	private JMenuItem mntmMüþteriIslemleri;
+	private JMenu mnUrunler;
+	private JMenuItem mntmUrunIslemleri;
 	public MainFrame() {
 		initialize();		
 	}
@@ -56,20 +59,22 @@ public class MainFrame extends JFrame {
 	private JMenuBar getMenuBar_1() {
 		if (menuBar == null) {
 			menuBar = new JMenuBar();
-			menuBar.add(getMnNewMenu());
+			menuBar.add(getMnIslemler());
+			menuBar.add(getMnUrunler());
 		}
 		return menuBar;
 	}
-	private JMenu getMnNewMenu() {
-		if (mnNewMenu == null) {
-			mnNewMenu = new JMenu("\u0130\u015Flemler");
-			mnNewMenu.add(getMntmBedenIslemleri());
-			mnNewMenu.add(getMntmDistributorIslemleri());
-			mnNewMenu.add(getMntmKategoriIslemleri());
-			mnNewMenu.add(getMntmKullaniciIislemleri());
-			mnNewMenu.add(getMntmNewMarkaIslemleri());
+	private JMenu getMnIslemler() {
+		if (mnIslemler == null) {
+			mnIslemler = new JMenu("\u0130\u015Flemler");
+			mnIslemler.add(getMntmBedenIslemleri());
+			mnIslemler.add(getMntmDistributorIslemleri());
+			mnIslemler.add(getMntmKategoriIslemleri());
+			mnIslemler.add(getMntmKullaniciIislemleri());
+			mnIslemler.add(getMntmNewMarkaIslemleri());
+			mnIslemler.add(getMntmMüþteriIslemleri());
 		}
-		return mnNewMenu;
+		return mnIslemler;
 	}
 	private JMenuItem getMntmDistributorIslemleri() {
 		if (mntmDistributorIslemleri == null) {
@@ -134,6 +139,20 @@ public class MainFrame extends JFrame {
 		}
 		return mntmNewMarkaIslemleri;
 	}
+	
+	private JMenuItem getMntmMüþteriIslemleri() {
+		if (mntmMüþteriIslemleri == null) {
+			mntmMüþteriIslemleri = new JMenuItem("M\u00FC\u015Fteri \u0130\u015Flemleri");
+			mntmMüþteriIslemleri.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					yeniTabEkle(e);	
+				}
+			});
+		}
+		return mntmMüþteriIslemleri;
+	}
 	private void yeniTabEkle(ActionEvent e) {
 			String tetiklenenMenuIsmi = e.getActionCommand();
 			switch (tetiklenenMenuIsmi) {
@@ -182,6 +201,15 @@ public class MainFrame extends JFrame {
 					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new MarkaIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
 				}
 				break;
+			case "Müþteri Ýþlemleri":
+				if (anaTabbedPane.getTabCount() == 0) {
+					anaTabbedPane.setVisible(true);				
+					anaTabbedPane.add(tetiklenenMenuIsmi, new MusteriIslemleriPaneli(this));
+				}
+				else {
+					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new MusteriIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
+				}
+				break;
 			default:
 				break;
 			}
@@ -204,5 +232,19 @@ public class MainFrame extends JFrame {
 	
 	
 	
+	
+	private JMenu getMnUrunler() {
+		if (mnUrunler == null) {
+			mnUrunler = new JMenu("\u00DCr\u00FCnler");
+			mnUrunler.add(getMntmUrunIslemleri());
+		}
+		return mnUrunler;
+	}
+	private JMenuItem getMntmUrunIslemleri() {
+		if (mntmUrunIslemleri == null) {
+			mntmUrunIslemleri = new JMenuItem("\u00DCr\u00FCn \u0130\u015Flemleri");
+		}
+		return mntmUrunIslemleri;
+	}
 	}
 
