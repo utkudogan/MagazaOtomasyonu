@@ -95,4 +95,10 @@ public enum Renkler {
 	yeþil,
 	zerd,
 	zeytuni;
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
 }

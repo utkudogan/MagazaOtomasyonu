@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.udogan.magazayonetimi.models.enums.Cinsiyet;
+import com.udogan.magazayonetimi.models.enums.Cinsiyetler;
 import com.udogan.magazayonetimi.models.enums.Renkler;
 
 @Entity
@@ -17,7 +17,7 @@ public class Urun {
 	private String isim;
 	private String model;
 	private Renkler renk;
-	private Cinsiyet cinsiyet;
+	private Cinsiyetler cinsiyet;
 	private Double fiyat;
 	private Long markaId;
 	
@@ -48,10 +48,10 @@ public class Urun {
 	public void setRenk(Renkler renk) {
 		this.renk = renk;
 	}
-	public Cinsiyet getCinsiyet() {
+	public Cinsiyetler getCinsiyet() {
 		return cinsiyet;
 	}
-	public void setCinsiyet(Cinsiyet cinsiyet) {
+	public void setCinsiyet(Cinsiyetler cinsiyet) {
 		this.cinsiyet = cinsiyet;
 	}
 	public Double getFiyat() {

@@ -11,7 +11,7 @@ import javax.swing.SwingConstants;
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import com.udogan.magazayonetimi.models.Kullanici;
-import com.udogan.magazayonetimi.models.enums.Yetki;
+import com.udogan.magazayonetimi.models.enums.Yetkiler;
 import com.udogan.magazayonetimi.utils.dao.DbServicessBase;
 
 import java.awt.BorderLayout;
@@ -60,7 +60,7 @@ public class KullaniciDegistirme extends JFrame {
 	private void alanlariDoldur() {
 		txtKullaniciAdi.setText(kullanici.getKullaniciAdi());
 		txtSifre.setText(kullanici.getSifre());
-		cmbYetki.setModel(new DefaultComboBoxModel(Yetki.values()));
+		cmbYetki.setModel(new DefaultComboBoxModel(Yetkiler.values()));
 		if (kullanici.getYetki() != null) {
 			cmbYetki.setSelectedItem(kullanici.getYetki());
 		} else {
@@ -97,7 +97,7 @@ public class KullaniciDegistirme extends JFrame {
 					;
 					degiseKullanici.setKullaniciAdi(txtKullaniciAdi.getText());
 					degiseKullanici.setSifre(txtSifre.getText());
-					degiseKullanici.setYetki((Yetki) cmbYetki.getSelectedItem());
+					degiseKullanici.setYetki((Yetkiler) cmbYetki.getSelectedItem());
 
 					if (dao.update(degiseKullanici)) {
 						showMessageDialog(null, "Kaydetme Ýþlemi Baþarýlý!");

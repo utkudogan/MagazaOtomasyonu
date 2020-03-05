@@ -23,7 +23,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import com.udogan.magazayonetimi.models.Kullanici;
-import com.udogan.magazayonetimi.models.enums.Yetki;
+import com.udogan.magazayonetimi.models.enums.Yetkiler;
 import com.udogan.magazayonetimi.utils.dao.DbServicessBase;
 
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -92,7 +92,7 @@ public class KullaniciIslemleriPaneli extends JPanel {
 		}
 	}
 	private void combolariDoldur() {
-		cmbYetki.setModel(new DefaultComboBoxModel(Yetki.values()));
+		cmbYetki.setModel(new DefaultComboBoxModel(Yetkiler.values()));
 		cmbYetki.setSelectedIndex(-1);
 	}
 
@@ -142,13 +142,13 @@ public class KullaniciIslemleriPaneli extends JPanel {
 						degistirilecekKullanici.setYetki(null);
 					}
 					if (temp.equals("Kasiyer")) {
-						degistirilecekKullanici.setYetki(Yetki.Kasiyer);
+						degistirilecekKullanici.setYetki(Yetkiler.Kasiyer);
 					} else if (temp.equals("SatisTemsilcisi")) {
-						degistirilecekKullanici.setYetki(Yetki.SatisTemsilcisi);
+						degistirilecekKullanici.setYetki(Yetkiler.SatisTemsilcisi);
 					} else if (temp.equals("SubeMuduru")) {
-						degistirilecekKullanici.setYetki(Yetki.SubeMuduru);
+						degistirilecekKullanici.setYetki(Yetkiler.SubeMuduru);
 					}else if (temp.equals("Yonetici")) {
-						degistirilecekKullanici.setYetki(Yetki.Yonetici);
+						degistirilecekKullanici.setYetki(Yetkiler.Yonetici);
 					}
 					KullaniciDegistirme frame = new KullaniciDegistirme(e, degistirilecekKullanici);
 					parentFrame.setEnabled(false);
@@ -178,7 +178,7 @@ public class KullaniciIslemleriPaneli extends JPanel {
 					Kullanici eklenecekKullanici = new Kullanici();
 					eklenecekKullanici.setKullaniciAdi(txtKullaniciAdi.getText());
 					eklenecekKullanici.setSifre(txtSifre.getText());
-					eklenecekKullanici.setYetki((Yetki)cmbYetki.getSelectedItem());
+					eklenecekKullanici.setYetki((Yetkiler)cmbYetki.getSelectedItem());
 
 					if (dao.save(eklenecekKullanici)) {
 						tabloyuDoldur();

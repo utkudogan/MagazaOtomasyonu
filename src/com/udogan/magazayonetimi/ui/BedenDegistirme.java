@@ -11,7 +11,7 @@ import javax.swing.SwingConstants;
 
 import com.udogan.magazayonetimi.models.Beden;
 import com.udogan.magazayonetimi.models.enums.Bedenler;
-import com.udogan.magazayonetimi.models.enums.Cinsiyet;
+import com.udogan.magazayonetimi.models.enums.Cinsiyetler;
 import com.udogan.magazayonetimi.utils.dao.DbServicessBase;
 
 import javax.swing.JTextField;
@@ -67,7 +67,7 @@ public class BedenDegistirme extends JFrame {
 	private void alanlariDoldur() {
 		cmbBeden.setModel(new DefaultComboBoxModel(Bedenler.values()));
 		cmbBeden.setSelectedItem(beden.getBeden());
-		cmbCinsiyet.setModel(new DefaultComboBoxModel(Cinsiyet.values()));
+		cmbCinsiyet.setModel(new DefaultComboBoxModel(Cinsiyetler.values()));
 		cmbCinsiyet.setSelectedItem(beden.getCinsiyet());
 		txtBasen.setText(Integer.toString(beden.getBasen()));
 		txtBel.setText(Integer.toString(beden.getBel()));
@@ -193,7 +193,7 @@ public class BedenDegistirme extends JFrame {
 					DbServicessBase<Beden> dao = new DbServicessBase<Beden>();
 					Beden degisecekBeden = new Beden();
 					degisecekBeden.setId(beden.getId());
-					degisecekBeden.setCinsiyet((Cinsiyet) cmbCinsiyet.getSelectedItem());
+					degisecekBeden.setCinsiyet((Cinsiyetler) cmbCinsiyet.getSelectedItem());
 					degisecekBeden.setBeden((Bedenler) cmbBeden.getSelectedItem());
 					degisecekBeden.setBasen(Integer.parseInt(txtBasen.getText()));
 					degisecekBeden.setBel(Integer.parseInt(txtBel.getText()));

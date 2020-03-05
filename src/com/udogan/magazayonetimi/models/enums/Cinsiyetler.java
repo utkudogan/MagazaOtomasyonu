@@ -1,6 +1,6 @@
 package com.udogan.magazayonetimi.models.enums;
 
-public enum Cinsiyet {
+public enum Cinsiyetler {
 	erkek,
 	kadin,
 	unisex;

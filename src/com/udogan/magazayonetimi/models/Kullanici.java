@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.udogan.magazayonetimi.models.enums.Yetki;
+import com.udogan.magazayonetimi.models.enums.Yetkiler;
 
 @Entity
 @Table(name = "kullanici")
@@ -17,7 +17,7 @@ public class Kullanici {
 	private Long id;
 	private String kullaniciAdi;
 	transient private String sifre;
-	private Yetki yetki;
+	private Yetkiler yetki;
 	
 	@Id
 	@SequenceGenerator(name = "seq_kullanici", allocationSize = 1, sequenceName = "seq_kullanici_id")
@@ -36,10 +36,10 @@ public class Kullanici {
 		this.kullaniciAdi = kullaniciAdi;
 	}
 	@Enumerated
-	public Yetki getYetki() {
+	public Yetkiler getYetki() {
 		return yetki;
 	}
-	public void setYetki(Yetki yetki) {
+	public void setYetki(Yetkiler yetki) {
 		this.yetki = yetki;
 	}
 	@Column(length = 100)

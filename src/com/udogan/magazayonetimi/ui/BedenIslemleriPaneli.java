@@ -23,7 +23,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.udogan.magazayonetimi.models.Beden;
 import com.udogan.magazayonetimi.models.enums.Bedenler;
-import com.udogan.magazayonetimi.models.enums.Cinsiyet;
+import com.udogan.magazayonetimi.models.enums.Cinsiyetler;
 import com.udogan.magazayonetimi.utils.dao.DbServicessBase;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -98,7 +98,7 @@ public class BedenIslemleriPaneli extends JPanel {
 	private void combolariDoldur() {
 		cmbBeden.setModel(new DefaultComboBoxModel(Bedenler.values()));
 		cmbBeden.setSelectedIndex(-1);
-		cmbCinsiyet.setModel(new DefaultComboBoxModel(Cinsiyet.values()));
+		cmbCinsiyet.setModel(new DefaultComboBoxModel(Cinsiyetler.values()));
 		cmbCinsiyet.setSelectedIndex(-1);
 	}
 
@@ -230,7 +230,7 @@ public class BedenIslemleriPaneli extends JPanel {
 				public void actionPerformed(ActionEvent e) {
 					DbServicessBase<Beden> dao = new DbServicessBase<Beden>();
 					Beden eklenecekBeden = new Beden();
-					eklenecekBeden.setCinsiyet((Cinsiyet) cmbCinsiyet.getSelectedItem());
+					eklenecekBeden.setCinsiyet((Cinsiyetler) cmbCinsiyet.getSelectedItem());
 					eklenecekBeden.setBeden((Bedenler) cmbBeden.getSelectedItem());
 					eklenecekBeden.setBasen(Integer.parseInt(txtBasen.getText()));
 					eklenecekBeden.setBel(Integer.parseInt(txtBel.getText()));
@@ -265,11 +265,11 @@ public class BedenIslemleriPaneli extends JPanel {
 							.setId(Long.parseLong(tableBedenler.getModel().getValueAt(secilenSatir, 0).toString()));
 					String temp = tableBedenler.getModel().getValueAt(secilenSatir, 1).toString();
 					if (temp.equals("erkek")) {
-						degistirilecekBeden.setCinsiyet(Cinsiyet.erkek);
+						degistirilecekBeden.setCinsiyet(Cinsiyetler.erkek);
 					} else if (temp.equals("kadin")) {
-						degistirilecekBeden.setCinsiyet(Cinsiyet.kadin);
+						degistirilecekBeden.setCinsiyet(Cinsiyetler.kadin);
 					} else if (temp.equals("unisex")) {
-						degistirilecekBeden.setCinsiyet(Cinsiyet.unisex);
+						degistirilecekBeden.setCinsiyet(Cinsiyetler.unisex);
 					}
 					temp = tableBedenler.getModel().getValueAt(secilenSatir, 2).toString();
 					if (temp.equals("XS")) {

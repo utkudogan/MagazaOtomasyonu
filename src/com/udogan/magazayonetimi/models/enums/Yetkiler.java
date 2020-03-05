@@ -1,6 +1,6 @@
 package com.udogan.magazayonetimi.models.enums;
 
-public enum Yetki {
+public enum Yetkiler {
 	SatisTemsilcisi,
 	Kasiyer,
 	SubeMuduru,

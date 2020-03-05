@@ -9,7 +9,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.udogan.magazayonetimi.models.enums.Bedenler;
-import com.udogan.magazayonetimi.models.enums.Cinsiyet;
+import com.udogan.magazayonetimi.models.enums.Cinsiyetler;
 
 @Entity
 @Table(name = "beden")
@@ -19,7 +19,7 @@ private Bedenler beden;
 private int basen;
 private int bel;
 private int gogus;
-private Cinsiyet cinsiyet;
+private Cinsiyetler cinsiyet;
 
 @Id
 @SequenceGenerator(name = "seq_beden", allocationSize = 1, sequenceName = "seq_beden_id")
@@ -59,10 +59,10 @@ public void setGogus(int gogus) {
 	this.gogus = gogus;
 }
 
-public Cinsiyet getCinsiyet() {
+public Cinsiyetler getCinsiyet() {
 	return cinsiyet;
 }
-public void setCinsiyet(Cinsiyet cinsiyet) {
+public void setCinsiyet(Cinsiyetler cinsiyet) {
 	this.cinsiyet = cinsiyet;
 }
 
