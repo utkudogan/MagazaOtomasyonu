@@ -30,4 +30,9 @@ public class Marka {
 	public void setIsim(String isim) {
 		this.isim = isim;
 	}
+	
+	@Override
+	public String toString() {
+		return getIsim();
+	}
 }

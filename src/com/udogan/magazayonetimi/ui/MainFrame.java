@@ -153,6 +153,19 @@ public class MainFrame extends JFrame {
 		}
 		return mntmMüþteriIslemleri;
 	}
+	private JMenuItem getMntmUrunIslemleri() {
+		if (mntmUrunIslemleri == null) {
+			mntmUrunIslemleri = new JMenuItem("\u00DCr\u00FCn \u0130\u015Flemleri");
+			mntmUrunIslemleri.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					yeniTabEkle(e);	
+				}
+			});
+		}
+		return mntmUrunIslemleri;
+	}
 	private void yeniTabEkle(ActionEvent e) {
 			String tetiklenenMenuIsmi = e.getActionCommand();
 			switch (tetiklenenMenuIsmi) {
@@ -210,6 +223,15 @@ public class MainFrame extends JFrame {
 					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new MusteriIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
 				}
 				break;
+			case "Ürün Ýþlemleri":
+				if (anaTabbedPane.getTabCount() == 0) {
+					anaTabbedPane.setVisible(true);				
+					anaTabbedPane.add(tetiklenenMenuIsmi, new UrunIslemleriPaneli(this));
+				}
+				else {
+					anaTabbedPane.insertTab(tetiklenenMenuIsmi, null, new UrunIslemleriPaneli(this),null, anaTabbedPane.getTabCount());
+				}
+				break;
 			default:
 				break;
 			}
@@ -240,11 +262,6 @@ public class MainFrame extends JFrame {
 		}
 		return mnUrunler;
 	}
-	private JMenuItem getMntmUrunIslemleri() {
-		if (mntmUrunIslemleri == null) {
-			mntmUrunIslemleri = new JMenuItem("\u00DCr\u00FCn \u0130\u015Flemleri");
-		}
-		return mntmUrunIslemleri;
-	}
+	
 	}
 

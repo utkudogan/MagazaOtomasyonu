@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.udogan.magazayonetimi.models.enums.Bedenler;
 import com.udogan.magazayonetimi.models.enums.Cinsiyetler;
 import com.udogan.magazayonetimi.models.enums.Renkler;
 
@@ -20,6 +21,7 @@ public class Urun {
 	private Cinsiyetler cinsiyet;
 	private Double fiyat;
 	private Long markaId;
+	private Bedenler beden;
 	
 	@SequenceGenerator(name = "seq_urun",initialValue = 1, sequenceName = "seq_urun_id",allocationSize = 1)
 	@GeneratedValue(generator = "seq_urun",strategy = GenerationType.SEQUENCE)
@@ -32,6 +34,12 @@ public class Urun {
 	}
 	public String getIsim() {
 		return isim;
+	}
+	public Bedenler getBeden() {
+		return beden;
+	}
+	public void setBeden(Bedenler beden) {
+		this.beden = beden;
 	}
 	public void setIsim(String isim) {
 		this.isim = isim;

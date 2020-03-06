@@ -84,7 +84,6 @@ public class DbServicessBase<T> implements IDbServicess<T>{
 			for (int i = 0; i < field.length; i++) {
 				field[i].setAccessible(true);
 				if(field[i].get(temp) != null &&!field[i].get(temp).equals("") ) {
-					//System.out.println(field[i].getType().getName().substring(field[i].getType().getName().lastIndexOf('.') + 1,field[i].getType().getName().length()));
 					if(field[i].getType().getName().substring(field[i].getType()
 							.getName().lastIndexOf('.') + 1,field[i].getType().getName().length())
 					.equals("Integer")) {
@@ -93,6 +92,11 @@ public class DbServicessBase<T> implements IDbServicess<T>{
 					if(field[i].getType().getName().substring(field[i].getType()
 							.getName().lastIndexOf('.') + 1,field[i].getType().getName().length())
 					.equals("Groups")) {
+						cr.add(Restrictions.eq(field[i].getName(),field[i].get(temp) ));
+					}
+					if(field[i].getType().getName().substring(field[i].getType()
+							.getName().lastIndexOf('.') + 1,field[i].getType().getName().length())
+					.equals("Long")) {
 						cr.add(Restrictions.eq(field[i].getName(),field[i].get(temp) ));
 					}
 				}
